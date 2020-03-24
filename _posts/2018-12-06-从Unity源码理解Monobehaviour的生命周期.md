@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      从Unity源码理解Monobehaviour的生命周期
-subtitle:   update,fixedUpdate,lateUpdate,start...它们的顺序到底是什么样的？
+subtitle:   update,fixedUpdate,lateUpdate,start...它们的顺序到底是什么样的
 date:       2018-12-06
 author:     John Young
 header-img: img/tag-bg-o.jpg
