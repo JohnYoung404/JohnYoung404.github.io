@@ -4,7 +4,7 @@ SEOTitle: John Young's Blog
 header-img: img/post-bg-desk.jpg
 email: JohnYoung404@outlook.com
 description: "Salvation lies within."
-keyword: "John Young, John Young's Blog, 郑阳的博客, JohnYoung404, 郑阳, Unity, Unreal, Game Developer"
+keyword: "John Young, John Young's Blog, 郑阳的博客, JohnYoung404, 郑阳, Unity, Unreal, Game Developer, Game Engine, C++"
 url: "http://JohnYoung404.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/JohnYoung404/JohnYoung404.github.io.git" # you code repository
@@ -12,13 +12,13 @@ github_repo: "https://github.com/JohnYoung404/JohnYoung404.github.io.git" # you 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "Goals determine what you going to be!"
-sidebar-avatar: /img/about-BY-gentle.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/avatar.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
 # SNS settings
 RSS: false
-zhihu_username:     Youngster
+zhihu_username:     zheng-yang-73-28
 github_username:    JohnYoung404
 #facebook_username:  baiying.qiu.7
 #jianshu_username:   e71990ada2fd
