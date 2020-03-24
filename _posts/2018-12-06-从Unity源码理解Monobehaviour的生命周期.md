@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      从Unity源码理解Monobehaviour的生命周期
+title:      Monobehaviour的生命周期
 subtitle:   update一定比lateUpdate先执行吗
 date:       2018-12-06
 author:     JohnYoung
