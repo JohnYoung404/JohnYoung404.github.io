@@ -3,12 +3,12 @@ layout:     post
 title:      从Unity源码理解Monobehaviour
 subtitle:   Update一定比LateUpdate先执行吗
 date:       2018-05-05
-author:     JohnYoung
+author:     John Young
 header-img: img/tag-bg-o.jpg
 catalog: true
 tags:
     - Unity
-    - iOS
+    - MonoBehaviour
 ---
 
 ## 前言
@@ -16,7 +16,7 @@ tags:
 Unity的Monobehaviour每个Unity程序员都不可能陌生，update, fixedUpdate, lateUpdate等等built-in函数也是信手拈来。Unity间程序员流传的一张MonoBehaviour的图更是被奉为圭臬。
 然而这篇文章的结论可能会超过你的想象：一些看似self-explanatory的接口，可能并不按你想象的顺序执行。
 
-这一切，都可以从Unity的源码中找到答案。
+而这一切，都是从Unity的源码中得到的答案。
 
 ## iOS 12 和 ARKit 2.0
 
