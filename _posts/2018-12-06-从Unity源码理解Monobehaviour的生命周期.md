@@ -1,13 +1,15 @@
 ---
 layout:     post
-title:      Monobehaviour的生命周期
-subtitle:   update
+title:      从Unity源码理解Monobehaviour的生命周期
+subtitle:   update一定比lateUpdate先执行吗？
 date:       2018-12-06
 author:     JohnYoung
 header-img: img/tag-bg-o.jpg
 catalog: true
 tags:
-    - Unity, Monobehaviour
+    - Unity
+	- MonoBehaviour
+	- Unity Source
 ---
 
 ## 前言
