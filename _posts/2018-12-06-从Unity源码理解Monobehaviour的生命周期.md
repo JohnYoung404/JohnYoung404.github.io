@@ -1,14 +1,14 @@
 ---
 layout:     post
-title:      Monobehaviour的生命周期
-subtitle:   update一定比lateUpdate先执行吗
-date:       2018-12-06
-author:     JohnYoung
-header-img: img/tag-bg-o.jpg
+title:      Xcode命令行工具管理
+subtitle:   如何切换Xcode命令行工具
+date:       2018-05-05
+author:     BY
+header-img: img/post-bg-kuaidi.jpg
 catalog: true
 tags:
-    - Unity
-	- MonoBehaviour
+    - Xcode
+    - iOS
 ---
 
 ## 前言
