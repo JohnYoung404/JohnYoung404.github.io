@@ -7,9 +7,7 @@ author:     John Young
 header-img: img/tag-bg-o.jpg
 catalog: true
 tags:
-    - Unity
-	- Monobehaviour
-	- Unity源码解析
+    - Unity, Monobehaviour
 ---
 
 ## 前言
