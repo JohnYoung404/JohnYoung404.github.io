@@ -25,7 +25,7 @@ Unity的Monobehaviour每个Unity程序员都不可能陌生，update, fixedUpdat
 
 这张图可能入门Unity的时候大家都见过，当你对MonoBehaviour的执行顺序有疑问时，也往往会搜到这张图。
 
-![](img/monoBehaviour/lifeCycle.jpg)
+![](../img/monoBehaviour/lifeCycle.png)
 
  
 
