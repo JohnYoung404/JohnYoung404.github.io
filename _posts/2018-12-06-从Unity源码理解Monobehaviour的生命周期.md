@@ -1,9 +1,9 @@
 ---
 layout:     post
 title:      Monobehaviour的生命周期
-subtitle:   update,fixedUpdate,lateUpdate,start
+subtitle:   update
 date:       2018-12-06
-author:     John Young
+author:     JohnYoung
 header-img: img/tag-bg-o.jpg
 catalog: true
 tags:
