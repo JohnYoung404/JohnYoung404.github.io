@@ -1,13 +1,13 @@
 ---
 layout:     post
-title:      Xcode命令行工具管理
-subtitle:   如何切换Xcode命令行工具
+title:      从Unity源码理解Monobehaviour
+subtitle:   Update一定比LateUpdate先执行吗
 date:       2018-05-05
-author:     BY
-header-img: img/post-bg-kuaidi.jpg
+author:     JohnYoung
+header-img: img/tag-bg-o.jpg
 catalog: true
 tags:
-    - Xcode
+    - Unity
     - iOS
 ---
 
