@@ -198,4 +198,4 @@ AddBehaviourCallbacksToManagers();
 
 假设一个MonoBehaviour是在Update中被实例化的，它的Fixed、UpdateUpdate和LateUpdater会被加到对应的BehaviourManager的第二个链表中，其中FixedUpdate、Update无论如何都是下一帧执行，因为合并链表的操作在Update开始时进行过一次，而FixedUpdate在这一帧早已经进行完了；但这一帧的LateUpdate还未执行合并链表的操作，因此新初始化的LateUpdate可以在这一帧执行。
 
-所以对于挂在了那个脚本的物体，如果是挂在场景中，或者是在Awake、Start中初始化的，那么不会有任何输出；如果是在Update中初始化的，则会输出一次“Eureka!”。
+所以对于挂在了那个脚本的物体，如果是挂在场景中，那么不会有任何输出；如果是在Update中初始化的，则会输出一次“Eureka!”。
