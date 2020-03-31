@@ -91,6 +91,7 @@ EA的光线追踪Demo：
 这一段话可以回答这个问题：
 >“The beauty of ray tracing is that it preserves the 3D world and visual effects like shadows, reflections and indirect lighting are a natural consequence of the ray tracing algorithm, not special effects.”
 ><p align="right">—Microsoft announcing DXR</p>
+
 那光线追踪很自然的就解决了之前局部照明中我们需要使用trick来解决的问题。接下来我们讨论几个典型的益处（在EA的project PICA PICA中也有讨论）：
 
 #### AO(Ambient Occulusion)
