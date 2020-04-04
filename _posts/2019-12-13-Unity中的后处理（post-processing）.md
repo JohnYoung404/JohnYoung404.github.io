@@ -52,12 +52,12 @@ public static void Blit(Texture source, RenderTexture dest, Material mat, int pa
 using UnityEngine;
 public class ExampleClass : MonoBehaviour 
 { 
-	public Material mat;
+    public Material mat;
     void OnRenderImage(RenderTexture src, RenderTexture dest) 
-	{ 	// Copy the source Render Texture to the destination, 
-		// applying the material along the way. 
-		Graphics.Blit(src, dest, mat); 
-	} 
+    { 	// Copy the source Render Texture to the destination, 
+    // applying the material along the way. 
+    Graphics.Blit(src, dest, mat); 
+    } 
 } 
 ```
 
@@ -67,17 +67,17 @@ public class ExampleClass : MonoBehaviour
 
 后处理的表达能力是很强的，除了纹理，还有各种buffer可以使用。常见的后处理效果及实现：
 
-* 屏幕扭曲（使用噪声图生成扰动的uv，使fragment shader中的uv取值有一定扰动，从而达成扭曲的效果）
+* **屏幕扭曲**（使用噪声图生成扰动的uv，使fragment shader中的uv取值有一定扰动，从而达成扭曲的效果）
 
-* 运动模糊（累积缓存、速度缓存）
+* **运动模糊**（累积缓存、速度缓存）
 
-* 景深（运用深度缓存+高斯模糊）
+* **景深**（运用深度缓存+高斯模糊）
 
-* Bloom（根据一个阈值提取出图像中的较亮区域，把它们存储在一张渲染纹理中，再利用高斯模糊对这张渲染纹理进行模糊处理，模拟光线的扩散，最后再将其与原图像进行混合，得到最终的效果）
+* **Bloom**（根据一个阈值提取出图像中的较亮区域，把它们存储在一张渲染纹理中，再利用高斯模糊对这张渲染纹理进行模糊处理，模拟光线的扩散，最后再将其与原图像进行混合，得到最终的效果）
 
-* 屏幕空间的抗锯齿（Anti-aliasing）、屏幕空间反射（Screen Space Reflections）、屏幕空间环境光遮蔽（Screen Space Ambient Occlusion）
+* **屏幕空间的抗锯齿（Anti-aliasing）**、**屏幕空间反射（Screen Space Reflections）**、**屏幕空间环境光遮蔽（Screen Space Ambient Occlusion）**
 
-* 其他图像处理能做的事，调个饱和度、亮度、伽马矫正、直方图均衡化……
+* 其他图像处理能做的事，调个**饱和度**、**亮度**、**伽马矫正**、**直方图均衡化**……
 
 ### 3. 边沿检测实现描边
 
@@ -85,26 +85,26 @@ public class ExampleClass : MonoBehaviour
 
 《Real-Time Rendering》中将描边技术分为五大类，几种技术的效果各不相同：
 
-* 基于法线和视角的描边( Shading Normal Contour Edges)		
+* **基于法线和视角的描边**( Shading Normal Contour Edges)		
 （计算NdotV，越小越接近边沿）
 
-* 过程式的几何描边( Procedural Geometry Silhouetting)	
+* **过程式的几何描边**( Procedural Geometry Silhouetting)	
 （又称shell method、halo method，做法是使模型朝着法线方向放大一些，着上背景色，然后再画模型，就能形成描边）
 
-* 基于图片处理的描边( Edge Detection by Image Processing)
+* **基于图片处理的描边**( Edge Detection by Image Processing)
 （下文详细讲）
 
-* 基于轮廓线检测的描边( Geometric Contour Edge Detection)	
+* **基于轮廓线检测的描边**( Geometric Contour Edge Detection)	
 （ silhouette edges： (n0⋅v>0)!=(n1⋅v>0)，遍历模型，如果两个相邻的面一个面向观察者一个背向观察者，那么它们公有的边就是边缘）
 
-* 混合以上几种描边方法(Hybrid Silhouetting)
+* **混合以上几种描边方法**(Hybrid Silhouetting)
 
 这里介绍一种，使用后处理的描边方法，主要原理是图像处理领域里的边沿检测。
 
 #### 边沿检测的原理
 
-* 卷积：卷积操作指的是使用一个卷积核，对一张图像中的每个像素进行一系列操作。卷积核通常是一个四方形网格结构，每个方格都有一个权重，进行卷积时，我们将卷积核的中心放在目标像素上，翻转核之后再依次计算核中每个元素和其覆盖的图像像素值的乘积并求和，得到的结果就是该位置的新像素值。
-* 梯度：边的形成的核心性质就是在边的两侧其差值较大，这种差值的绝对值叫做梯度。基于这个内容，我们使用几种不同的边缘检测算子来计算梯度。
+* **卷积**：卷积操作指的是使用一个卷积核，对一张图像中的每个像素进行一系列操作。卷积核通常是一个四方形网格结构，每个方格都有一个权重，进行卷积时，我们将卷积核的中心放在目标像素上，翻转核之后再依次计算核中每个元素和其覆盖的图像像素值的乘积并求和，得到的结果就是该位置的新像素值。
+* **梯度**：边的形成的核心性质就是在边的两侧其差值较大，这种差值的绝对值叫做梯度。基于这个内容，我们使用几种不同的边缘检测算子来计算梯度。
     - Roberts
     - Prewitt
     - Sobel
