@@ -80,6 +80,7 @@ tags:
 
 ### 3. 未来可以继续迭代的内容
 * 优化帧率（SIDM、多线程）
+* 目前我们的着色是unlit的，可以加入简单的光照模型
 * 加入场景管理，实现模型变换。
 * 加入Alpha Test和Blend
 * 实现deferred rendering
