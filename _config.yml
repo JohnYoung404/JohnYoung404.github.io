@@ -98,10 +98,7 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "sOmEThIng yOU wAnNa SeE",
-        href: "https://en.cppreference.com/w/"
-    },{
-        title: "gReAt sItE yOU sHOulD kNoW",
-        href: "https://docs.unity3d.com/Manual/index.html"
+        title: "我的简历",
+        href: "https://johnyoung404.github.io/resume/index.html"
     }
 ]
