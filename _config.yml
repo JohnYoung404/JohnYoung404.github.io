@@ -100,5 +100,9 @@ friends: [
     {
         title: "我的简历",
         href: "https://johnyoung404.github.io/resume/index.html"
+    },
+    {
+        title: "Demo Legend",
+        href: "https://johnyoung404.github.io/games/DemoLegend/index.html"
     }
 ]
