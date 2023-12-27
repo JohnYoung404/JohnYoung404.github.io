@@ -1,7 +1,7 @@
 # Site settings
 title: John Young's Blog
 SEOTitle: John Young's Blog
-header-img: img/post-bg-desk.jpg
+header-img: img/apple-touch-icon.png
 email: JohnYoung404@outlook.com
 description: "Salvation lies within."
 keyword: "John Young, John Young's Blog, 郑阳的博客, JohnYoung404, 郑阳, Unity, Unreal, Game Developer, Game Engine, C++"
@@ -97,10 +97,6 @@ service-worker: true
 
 # Friends
 friends: [
-    {
-        title: "我的简历",
-        href: "https://johnyoung404.github.io/resume/index.html"
-    },
     {
         title: "Demo Legend",
         href: "https://johnyoung404.github.io/games/DemoLegend/index.html"
