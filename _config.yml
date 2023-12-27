@@ -95,8 +95,8 @@ service-worker: true
 
 
 
-# Friends
-friends: [
+# More links
+more: [
     {
         title: "Demo Legend",
         href: "https://johnyoung404.github.io/games/DemoLegend/index.html"

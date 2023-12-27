@@ -143,13 +143,12 @@ layout: default
                 </section>
                 {% endif %}
 
-                <!-- Friends Blog -->
-                {% if site.friends %}
+                {% if site.more %}
                 <hr>
-                <h5>FRIENDS</h5>
+                <h5>MORE</h5>
                 <ul class="list-inline">
-                    {% for friend in site.friends %}
-                        <li><a href="{{friend.href}}">{{friend.title}}</a></li>
+                    {% for more in site.more %}
+                        <li><a href="{{more.href}}">{{more.title}}</a></li>
                     {% endfor %}
                 </ul>
                 {% endif %}
