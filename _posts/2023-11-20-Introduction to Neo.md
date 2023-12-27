@@ -59,8 +59,10 @@ B --> ETC(...)
 正如上图所示，Neo是C/S双端架构，客户端和服务器都使用C#语言开发。这样设计有一个好处，就是客户端和服务器很容易就可以共用代码。在Neo里，我把共用代码放到一个叫作`Shared Core`的csproj，Unity客户端和`Server Core`都依赖于这个工程生成的dll。在`Shared Core`里有网络框架、背包引擎、C-S共用数据模型、日志、行为树、状态机、Math等模块。<br/>
 我将服务端的部分抽出成一个`Server Core`的csproj，然后构建目标也是一个dll，最后ConsoleApp去引用这个dll。这样做的目的是，将来如果有在Unity端运行本地服务器的需求，可以很方便地进行迁移。
 
-###2.技术细节
+### 2.技术细节
+
+![](https://johnyoung404.github.io/img/Neo/login.png)
+
+### 3.一个实例-背包系统
 
 ![](https://johnyoung404.github.io/img/Neo/item_detail.png)
-
-###3.一个实例-背包系统
