@@ -67,14 +67,33 @@ Neo是我这两三年来的一个兴趣项目，我的初衷是在这个项目�
 服务端运行结果（打印 -> 等待3秒 -> 循环5次，每次90%概率打印）：
 ![](https://johnyoung404.github.io/img/Neo/bt_svr.jpg)
 
-* **InventoryEngine**：
+* **InventoryEngine**：对于Shared模块的背包引擎，它提供一个类似于《暗黑破坏神》（diablo-like）的背包系统。它最主要的功能是通过外部数据创建一个背包引擎，判断各种item操作的合法性（特殊要求和通用的位置要求，即两个item位置不能重叠，item不能放到背包之外等等），然后给出结果。出于解耦的需要，item的特殊合法性判断需要通过委托去做（例如：是否可以进背包？、是否可以丢弃？、是否可以堆叠？、是否可以交换位置？、是否可以使用？），同时会将操作结果通过事件发出去（例如`onItemAdd`，`onItemRemove`，`onItemAmountChange`，`onItemSwap`，`onItemDrop`，`onItemUse`）。对于客户端与服务器的外部系统如何使用这个模块，我会在第3部分的实例部分进行更多讲解。
 
+* **其他**：我认为寻路也是适合做在Shared模块的，虽然目前Neo暂时没有。如果做的话，技术路线我会选择基于开源的[Recast](https://github.com/benjamn/recast)。Neo还有一个GridEngine也放在Shared模块，它主要是做基于格子的（例如战棋类游戏）的寻路、范围查找等等。其实只要是不依赖于引擎并且CS双方都可以使用的功能，都是可以考虑进行解耦然后放在Shared模块里的。
 
 #### 2.2 Unity客户端
 
+* **配置工具**
+
+* **热更新**
+
+* **资源加载**
+
+* **Debug控制台**
+
+* **UI框架**
+
 #### 2.3 .net服务端
 
+* **DB**
+* **Bot**
+* **Gacha**
+
 #### 2.4 网络通信
+
+* **Protocol**
+* **Rpc**
+* **DataModel**
 
 ### 3.一个实例-背包系统
 
