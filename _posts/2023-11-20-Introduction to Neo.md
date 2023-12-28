@@ -61,7 +61,61 @@ B --> ETC(...)
 
 ### 2.技术细节
 
+#### 2.1 共享程序集：Shared Core
+
+共享的程序集是客户端和服务器都引用到的，因此只能有纯C#逻辑，而不能使用Unity引擎的API。设计理念上，它的子模块需要遵循依赖倒置原则（DIP），子模块的运行不能依赖于外部的实例类，而是依赖于接口，通过事件与调用者通信。它的子模块如下：
+
+* **Log**：客户端或服务器所有日志都通过这个模块进行，会在当前工作目录下根据日期和pid创建日志文件，写入日志会带有时间戳、调用模块、日志等级等信息。对于Unity来说，需要通过回调与Unity.Debug.Log桥接起来；对于服务器控制台程序，需要通过回调与Console.WriteLine桥接起来。这样Unity的控制台和服务端就都能显示日志了。我们的服务端日志大概长这样：
 ![](https://johnyoung404.github.io/img/Neo/login.png)
+
+* **Util**：有一些基础设施适合放在shared模块，这样就不需要同时维护两份。例如：SingletonBase（单例基类）、ListExtension（列表的洗牌、随机采样等）、StringExtension（用正则表达式进行用户名/密码校验等）、Math（浮点数取整、lerp、定点数等）、Random（掷骰子、圆面随机、球面随机）、PerformanceGuard（用RAII的方式监控关键路径的运行时间）、CalculationEngine（字符串公式计算，Neo使用的是第三方库Jace\.Net）、EventCore（事件系统）
+
+* **Shared Data**：客户端和服务器在数据定义上，也有一些共有部分。例如：客户端和服务端的共用配置表、客户端与服务端协议、客户端与服务端共用的DataModel。关于这一部分，后续的导表工具与网络模块会介绍更多细节。
+
+* **Reflection**：擅用反射可以将你从繁琐重复的各种Register中解放出来。Neo中广泛使用反射进行事件监听。例如，服务端程序集里所有标记了`[REPLCmd]`(Read-Evaluate-Print-Loop)的static方法，都可以通过控制台的用户输入调用；Shared程序集里所有标记了`[UnitTest]`的static方法，都会在收到单元测试指令时运行一次；所有网络协议的处理函数注册，是通过反射进行的，例如登录协议的处理函数，需要标记`[ProtocolHandler(typeof(Req_Login))]`；服务端收到客户端的GM协议时，会查找对应的标记`[GMCmd]`的函数并分析函数签名，决定是否执行。<br/>
+下面这个例子展示了反射模块的单元测试：
+``` C#
+
+[TheTestFunc]
+public static void TestFunc(int x, string y)
+{
+    Neo.Log($"TestFunc, x={x}, y={y}");
+}
+
+[UnitTest]
+private static async void _RunReflectionTest()
+{
+    await ReflectionUtil.PreloadMethodsFromAssembly(new List<string>
+    {
+        "Neo.Shared",
+        "Neo.Server.Core",
+    });
+
+    using (var utg = new UnitTestGuard("ReflectionUtil"))
+    {
+        Dictionary<string, MethodInfo> methodMap;
+        using (var utg1 = new UnitTestGuard("ReflectionUtil-LoadMethods"))
+        {
+            methodMap = ReflectionUtil.GetMethodsMapWithAttribute<TheTestFuncAttribute>(new List<string> { "Neo.Shared" });
+        }
+        using (var utg2 = new UnitTestGuard("ReflectionUtil-CallMethods"))
+        {
+            ReflectionUtil.TryInvokeMethodFromCmdString(methodMap, "TestFunc 12345 Hello");
+        }
+    }
+}
+```
+
+* **BehaviourTree**：
+
+* **InventoryEngine**：
+
+
+#### 2.2 Unity客户端
+
+#### 2.3 .net服务端
+
+#### 2.4 网络通信
 
 ### 3.一个实例-背包系统
 
