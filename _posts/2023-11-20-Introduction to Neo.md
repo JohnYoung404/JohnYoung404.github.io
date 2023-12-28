@@ -74,8 +74,8 @@ B --> ETC(...)
 
 * **Reflection**：擅用反射可以将你从繁琐重复的各种Register中解放出来。Neo中广泛使用反射进行事件监听。例如，服务端程序集里所有标记了`[REPLCmd]`(Read-Evaluate-Print-Loop)的static方法，都可以通过控制台的用户输入调用；Shared程序集里所有标记了`[UnitTest]`的static方法，都会在收到单元测试指令时运行一次；所有网络协议的处理函数注册，是通过反射进行的，例如登录协议的处理函数，需要标记`[ProtocolHandler(typeof(Req_Login))]`；服务端收到客户端的GM协议时，会查找对应的标记`[GMCmd]`的函数并分析函数签名，决定是否执行。<br/>
 下面这个例子展示了反射模块的单元测试：
-``` C#
 
+``` C#
 [TheTestFunc]
 public static void TestFunc(int x, string y)
 {
