@@ -61,7 +61,10 @@ Neo是我这两三年来的一个兴趣项目，我的初衷是在这个项目�
 下面这个例子展示了反射模块的单元测试：
 ![](https://johnyoung404.github.io/img/Neo/reflection.jpg)
 
-* **BehaviourTree**：
+* **BehaviourTree**：最初的时候，我只把行为树模块放在了客户端，并基于Unity的GraphView写了行为树的图形编辑工具。
+![](https://johnyoung404.github.io/img/Neo/bt.jpg)
+![](https://johnyoung404.github.io/img/Neo/bt_json.jpg)
+![](https://johnyoung404.github.io/img/Neo/bt_svr.jpg)
 
 * **InventoryEngine**：
 
