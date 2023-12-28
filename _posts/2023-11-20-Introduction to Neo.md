@@ -61,9 +61,10 @@ Neo是我这两三年来的一个兴趣项目，我的初衷是在这个项目�
 下面这个例子展示了反射模块的单元测试：
 ![](https://johnyoung404.github.io/img/Neo/reflection.jpg)
 
-* **BehaviourTree**：最初的时候，我只把行为树模块放在了客户端，并基于Unity的GraphView写了行为树的图形编辑工具。
+* **BehaviourTree**：最初的时候，我只把行为树模块放在了客户端，并基于Unity的GraphView写了行为树的图形编辑工具。但是在后来的迭代中，我受到了[《守望先锋》的GDC演讲](https://www.youtube.com/watch?v=odSBJ49rzDo)的启发，觉得行为树做成客户端与服务器共用的话，可能会有更多应用场景。《守望先锋》的gameplay脚本State Script，在我看来和一个带有变量系统的行为树差不多，而State Script是在客户端和服务器各运行一份的，带有预测、回滚等等功能。因此，我心中最理想的行为树框架，也是客户端、服务器共同运行的，同时允许一些表现逻辑只在客户端运行；客户端与服务端的行为树状态可以通过协议同步。这样的话，行为树不仅仅可以做AI逻辑，也可以用来做gameplay逻辑。<br/>
+这是Neo中行为树的编辑界面：
 ![](https://johnyoung404.github.io/img/Neo/bt.jpg)
-![](https://johnyoung404.github.io/img/Neo/bt_json.jpg)
+服务端运行结果（打印 -> 等待3秒 -> 循环5次，每次90%概率打印）：
 ![](https://johnyoung404.github.io/img/Neo/bt_svr.jpg)
 
 * **InventoryEngine**：
