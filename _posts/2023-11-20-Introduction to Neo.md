@@ -99,9 +99,18 @@ patch界面长这样：
 从登录场景切换到大厅的过渡效果：
 ![](https://johnyoung404.github.io/img/Neo/scene_loading.gif)
 
-* **UI框架**：
+* **UI框架**：UI框架是由我自己开发的，主要包含界面加载、层级管理、界面生命周期事件，一个可拖拽的window类，以及Tween动画的处理。实际上界面打开、关闭也是一个异步过程：例如当界面挂载了tween动画组件时，关闭界面就需要先等待动画播放完成，再将它释放回对象池。<br/>
+这是装备和背包界面的打开/关闭、拖拽、层级处理的效果：
+![](https://johnyoung404.github.io/img/Neo/panels.gif)
 
-* **其他模块**：
+* **其他模块**：Neo还有很多功能完善的基础模块：
+  - ObjectPoolMgr：通用的游戏物体的对象池系统，支持动态扩容和收缩
+  - Toast：通用的toast提示
+  - MsgBox：通用弹窗选择，可以适配不同style，是一个异步过程
+  - AudioMgr：音效管理，支持基于playerPrefs的音量调节，支持背景音淡入淡出切换
+  - ToolTips：hover在界面上时的提示，支持不同style
+  - ModelDisplayer：模型显示在界面上，以及拖拽检视
+  - 集成的第三方库：[LoopScrollRect](https://github.com/qiankanglai/LoopScrollRect)，[Translucent Image](https://assetstore.unity.com/packages/tools/gui/translucent-image-fast-ui-background-blur-78464)，[Animancer](https://kybernetik.com.au/animancer/)，[Odin Inspector](https://odininspector.com/)，[DoTween](https://dotween.demigiant.com/)，[A* Pathfinding Project](https://arongranberg.com/astar/)，[NodeGraphProcessor](https://github.com/alelievr/NodeGraphProcessor)，[UniTask](https://github.com/Cysharp/UniTask)，[UIEffect](https://github.com/mob-sakai/UIEffect)，[Unity UI Extensions](https://github.com/Unity-UI-Extensions/com.unity.uiextensions)，[Magica Cloth](https://assetstore.unity.com/packages/tools/physics/magica-cloth-160144)
 
 #### 2.3 .net服务端
 
