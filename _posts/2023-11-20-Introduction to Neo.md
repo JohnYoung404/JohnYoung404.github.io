@@ -73,21 +73,29 @@ Neo是我这两三年来的一个兴趣项目，我的初衷是在这个项目�
 
 #### 2.2 Unity客户端
 
-客户端部分我想主要介绍一下Neo对于客户端基础设施（例如导表、热更新etc）的技术路线。
+对于Unity客户端开发，我偏好以package的形式去开发各个模块，这样模块化的处理其实也是一种解耦，大大增加了代码复用的可能性。这一章节，我将主要介绍一下Neo对于客户端基础设施（例如导表、热更新etc）的技术选型。注意，虽然这些第三方的项目都挺优秀，但并不适合即插即用。为了适配Neo的程序集划分以及目录结构，我花了一些工夫去写一些工具脚本，以及调整了目录结构。
 
-* **配置工具**：配置工具我选用的是[luban导表工具](https://github.com/focus-creative-games/luban)，它的功能完善：支持多种编程语言，支持本地化，支持多种导出格式，支持枚举、结构体定义。在Neo中，不仅仅使用luban导出配置表，也使用它导出协议。
+* **配置工具**：配置工具我选用的是[luban导表工具](https://github.com/focus-creative-games/luban)，它的功能完善：支持多种编程语言，支持本地化，支持多种导出格式，支持枚举、结构体定义。在Neo中，不仅仅使用luban导出配置表，也使用它导出协议。<br/>
 例如Neo中装备的定义如下，其中枚举类型使用了中文别名，导出后会是枚举值：
 ![](https://johnyoung404.github.io/img/Neo/config.jpg)
 再比如Neo中，抽卡协议的定义如下，定义了一个Rpc，以及其arguments和return的结构：
 ![](https://johnyoung404.github.io/img/Neo/gacha.jpg)
-* **热更新**
 
-* **资源加载**
+* **热更新**：热更新是一个有趣的话题，我在[这篇blog](https://johnyoung404.github.io/2020/11/17/Unity%E8%B7%A8%E5%B9%B3%E5%8F%B0/)里提到过一些关于Unity的跨平台、热更的知识。基本所有热更框架都是通过内嵌某种语言的虚拟机来解释执行（JIT）从而做到热更的。相信Unity程序员一定接触过各种lua：xlua、tolua、ulua、slua，除了lua，我在网易供职的两年里，还基于网易的in-house引擎NeoX开发过两年的python（苦笑）。<br/>
+热更新确实是一个很实际的需求，but at what cost？至少从我好几年的弱类型语言的体验来说，我不觉得lua、python这些语言适合开发所有的游戏逻辑，尤其是异步逻辑以及偏底层的逻辑。使用C#这样强类型语言，效率优势是一方面，表达能力优势是另一方面。例如lua下要写一个复杂一些的异步逻辑，很可能需要用promise这样的编程范式，如果用回调的话，极易掉入回调地狱(callback hell)，即使是这样，debug起来也是十分痛苦；而在C#中，使用async/await的编程范式能更好的处理异步的情况，也容易处理cancellation或者exception。<br/>
+因此我倾向于可以直接使用C#语言的热更框架（例如早先流行的ILRuntime），并且最好没有过多语言层面的限制，可以像原生C#一样去开发。最后我选择了[HybridCLR](https://github.com/focus-creative-games/hybridclr)这个框架，花了较多的功夫，踩了相当多的坑之后，整合到了Neo中。不过结果我是非常满意的：`Shared Core`和所有Neo的客户端程序集都是可以热更的，大部分第三方程序集也是可以热更的；Editor模式下正常开发，使用原生dll，不影响debug；PC包则使用打在资源包里的dll，拥有完整的热更功能。
 
-* **Debug控制台**
+* **资源加载**：这一部分我使用的是[YooAsset](https://github.com/tuyoogame/YooAsset)，在本地用[httpFileServer](https://www.rejetto.com/hfs/)搭建一个文件服务器，就可以测试YooAsset的远程资源包下载。在这里可以介绍一下Neo的游戏启动流程了：Neo有一个引导package，它的代码是不能热更的，它的资源都是built-in打进包的。它的功能就是来做下载的，因此资源量很少，代码也只有资源包下载、热更dll加载等逻辑。<br/>
+patch界面长这样：
+![](https://johnyoung404.github.io/img/Neo/update.jpg)
+下载完最新资源后，会先加载AOT dll的MetaData（HybridCLR用它来生成未出现的泛型类型），再加载普通的热更新dll，然后执行其中的入口dll的Entry函数。至此之后，所有的逻辑都是可以热更新的了。
+
+* **Debug控制台**：
 ![](https://johnyoung404.github.io/img/Neo/console.jpg)
 
-* **UI框架**
+* **UI框架**：
+
+* **其他模块**：
 
 #### 2.3 .net服务端
 
