@@ -73,13 +73,19 @@ Neo是我这两三年来的一个兴趣项目，我的初衷是在这个项目�
 
 #### 2.2 Unity客户端
 
-* **配置工具**
+客户端部分我想主要介绍一下Neo对于客户端基础设施（例如导表、热更新etc）的技术路线。
 
+* **配置工具**：配置工具我选用的是[luban导表工具](https://github.com/focus-creative-games/luban)，它的功能完善：支持多种编程语言，支持本地化，支持多种导出格式，支持枚举、结构体定义。在Neo中，不仅仅使用luban导出配置表，也使用它导出协议。
+例如Neo中装备的定义如下，其中枚举类型使用了中文别名，导出后会是枚举值：
+![](https://johnyoung404.github.io/img/Neo/config.jpg)
+再比如Neo中，抽卡协议的定义如下，定义了一个Rpc，以及其arguments和return的结构：
+![](https://johnyoung404.github.io/img/Neo/gacha.jpg)
 * **热更新**
 
 * **资源加载**
 
 * **Debug控制台**
+![](https://johnyoung404.github.io/img/Neo/console.jpg)
 
 * **UI框架**
 
