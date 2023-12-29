@@ -95,7 +95,8 @@ patch界面长这样：
 这是在登录界面按[`Esc`]键呼出控制台的样子（开发模式下Shared模块的单元测试每次都会跑一遍）：
 ![](https://johnyoung404.github.io/img/Neo/console.jpg)
 
-* **场景切换**：一个通用的场景切换功能，灵感来自于一个原型制作插件[Feel](https://feel.moremountains.com/)。这个场景切换是一个异步过程：1.用Additive的方式加载过渡场景；2.播放过渡场景的淡入动画与加载circle的动画；3.卸载原场景；4.通过YooAsset的异步加载接口加载目标场景并激活场景；5.播放过渡场景的淡出动画；6.卸载过渡场景。
+* **场景切换**：一个通用的场景切换功能，灵感来自于一个原型制作插件[Feel](https://feel.moremountains.com/)。这个场景切换是一个异步过程：1.用Additive的方式加载过渡场景；2.播放过渡场景的淡入动画与加载circle的动画；3.卸载原场景；4.通过YooAsset的异步加载接口加载目标场景并激活场景；5.播放过渡场景的淡出动画；6.卸载过渡场景。<br/>
+从登录场景切换到大厅的过渡效果：
 ![](https://johnyoung404.github.io/img/Neo/scene_loading.gif)
 
 * **UI框架**：
