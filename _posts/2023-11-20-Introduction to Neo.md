@@ -106,6 +106,7 @@ patch界面长这样：
 * **其他模块**：Neo还有很多功能完善的基础模块：
   - ObjectPoolMgr：通用的游戏物体的对象池系统，支持动态扩容和收缩
   - Toast：通用的toast提示
+  - Plot：基于节点图的剧情系统
   - MsgBox：通用弹窗选择，可以适配不同style，是一个异步过程
   - AudioMgr：音效管理，支持基于playerPrefs的音量调节，支持背景音淡入淡出切换
   - ToolTips：hover在界面上时的提示，支持不同style
@@ -135,4 +136,16 @@ patch界面长这样：
 
 ![](https://johnyoung404.github.io/img/Neo/item_detail.png)
 
+对于背包、装备和仓库系统，其实三者都可以看作是Inventory的一种。背包的装备、材料、消耗品等页签，可以看作是一个个只接受对应分类item的inventory；而仓库可以看作是接受所有分类item的一种inventory；装备的每一个slot，可以看成一个`1x1`的只接受对应部位装备的inventory。<br/>
+
+因此，我们可以定义一个inventory表来配置上述系统。表里有id字段，作为每个inventory的唯一标识；有group字段，通过检查group，确定每个inventory是背包页、仓库页还是装备格；有width和height字段，决定背包的size大小；有标记了`[Flag]`的category枚举字段，表示该inventory能接收的item种类。<br/>
+
+对于数据部分，在我们的DataModel里，需要新增一个结构在客户端与服务器之间同步所有inventory的信息。这是一个嵌套结构，最外层是id为key、inventoryInfo为value的字典，而inventoryInfo是一个itemPos为key、itemInfo为value的字典。当我们新建账号时，或者检查账号数据完整性时，会根据配置表中的inventory定义初始化我们的DataModel。在用户登录或重连时，DataModel中所有的信息会全量同步给客户端。当因为收到客户端操作，或者其他系统导致背包数据变化时，服务器会存盘背包数据，同时将背包数据的变化的json发送给客户端。客户端无法修改DataModel，完全以服务端作为权威；当客户端收到变化json后，应用到本地的DataModel上，就能保证是与远端是一致的。<br/>
+
+对于协议部分，我们只需要新增一个Item操作的rpc。它的Args包含：操作的item所属inventoryId、操作的item位置、目标inventoryId、目标item位置、操作类型（Move/Drop/Use）；而这个rpc的Result则是成功或失败的枚举。<br/>
+
+对于客户端界面显示部分，主要是两点：1.）item的拖拽操作会生成对应的rpc，这是一个异步操作，收到rpc回包前应该屏蔽其他背包操作；2.）背包等界面打开时，应该监听DataModel中相应字段的onValueChange事件，当受到事件时，应该用最新的DataModel刷新界面
+
 ### 4. To Be Continued 
+
+Neo是一个不断迭代的框架，我也为它制定了一个RoadMap，接下来会做角色相关（模型、动画、控制），以及技能系统。当有更多阶段性的进展之后，我应该会写一些更多关于Neo的博客\^_\^
