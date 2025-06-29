@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      linux命令行与shell编程
+title:      Linux命令行与shell编程
 subtitle:   个人向的知识备忘录
-date:       2025-06-30
+date:       2025-06-20
 author:     John Young
 header-img: img/tag-bg-o.jpg
 catalog: true
